@@ -5,13 +5,18 @@
 
 #include "MarkovTextGen.h"
 
+using namespace std;
+
 MarkovTextGen mtgGenerator;
 
 int main()
 {
-    std::cout << "Random Text Generator using Markov Chain\n";
+    cout << "Random Text Generator using Markov Chain\n";
 
-    mtgGenerator.GenerateFromFile("library.txt");
+    mtgGenerator.GenerateDictionaryFromFile("library.txt");
+    wstring sOutput = mtgGenerator.GenerateSentence();
+    cout << endl << endl;
+    wcout<<sOutput<<endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

@@ -7,11 +7,12 @@
 class MarkovTextGen
 {
 public:
-	bool GenerateFromFile(std::string filename);
+	bool GenerateDictionaryFromFile(std::string filename);
+	std::wstring GenerateSentence();
 
 private:
-	std::map<std::string, std::vector<std::string>> mDictionary;
+	std::map<std::wstring, std::vector<std::wstring>> mDictionary;
 	uint8_t nGramSize = 2;
-	std::vector<std::string> vStartingWords;
+	std::vector<std::wstring> vStartingWords;
 };
 
