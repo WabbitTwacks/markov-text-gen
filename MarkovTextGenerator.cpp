@@ -16,7 +16,7 @@ int main()
     mtgGenerator.GenerateDictionaryFromFile("library.txt");
     wstring sOutput = mtgGenerator.GenerateSentence();
     cout << endl << endl;
-    wcout<<sOutput<<endl;
+    wcout<<sOutput<<endl<<endl<<endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

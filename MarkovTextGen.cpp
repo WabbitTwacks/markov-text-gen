@@ -35,7 +35,7 @@ bool MarkovTextGen::GenerateDictionaryFromFile(std::string filename)
 			wstring wsNGram = L"";
 
 			//get an n-gram depending on nGramSize
-			if (i + 1 != vWords.end()) //skip if last word
+			if (i + nGramSize != vWords.end()) //skip if last word
 			{
 				for (int n = 0; n < nGramSize; n++)
 				{
@@ -44,6 +44,10 @@ bool MarkovTextGen::GenerateDictionaryFromFile(std::string filename)
 					if (n != nGramSize - 1)
 						wsNGram += L" ";
 				}
+			}
+			else
+			{
+				break;
 			}
 
 			if (bEos) //if last N-Gram was end of sentence, store the current one as a begining of sentence
@@ -57,9 +61,16 @@ bool MarkovTextGen::GenerateDictionaryFromFile(std::string filename)
 			if (i->find_last_of('.') != wstring::npos) //check if end of sentence
 				bEos = true;
 
-			if (i + 1 != vWords.end() && !bEos)
-				if (i + 2 != vWords.end() && !bEos)
-					mDictionary[wsNGram].push_back(*(i + 2));			
+			for (int n = 0; n < nGramSize; n++)
+			{
+				if (i + n == vWords.end() || bEos)
+					break;
+				
+				if (n != nGramSize - 1)
+					continue;
+				else
+					mDictionary[wsNGram].push_back(*(i + nGramSize));
+			}
 		}		
 	}
 	else
